@@ -16,6 +16,41 @@ const searchCity = "Birmingham";
 // Current Weather API URL
 const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}`;
 
+// Get elements by ID
+const searchInput = document.querySelector("#searchInput");
+
+const searchList = document.querySelector("#searchList");
+
+console.log(searchList);
+
+// Function to get search input
+const search = () => {};
+
+searchInput.addEventListener(
+  "keydown",
+  function (event) {
+    if (event.code == "Enter") {
+      const query = searchInput.value;
+      console.log(query);
+      appendSearch(query);
+    }
+  },
+  true
+);
+
+// Add search to list
+const appendSearch = (city) => {
+  const li = document.createElement("li");
+  li.classList.add("nav-item");
+  li.innerHTML = `<a class="nav-link" href="#">
+  <span class="material-icons align-middle">
+    location_city
+  </span>
+  <span class="align-middle">${city}</span>
+</a>`;
+  searchList.appendChild(li);
+};
+
 // Get the One Weather data
 const getOneWeather = async () => {
   try {

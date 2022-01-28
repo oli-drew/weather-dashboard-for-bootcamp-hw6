@@ -24,8 +24,11 @@
     <header
       class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow"
     >
-      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-bold" href="#"
-        >Weather Dashboard</a
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"
+        >Weather Dashboard
+        <span class="material-icons text-warning align-middle"
+          >light_mode</span
+        ></a
       >
       <button
         class="navbar-toggler position-absolute d-md-none collapsed"
@@ -39,6 +42,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <input
+        id="searchInput"
         class="form-control w-100"
         type="text"
         placeholder="Search for a city.."
@@ -53,34 +57,19 @@
           id="sidebarMenu"
           class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
         >
-          <div class="position-sticky pt-3">
+          <div class="position-sticky pt-1">
+            <!-- Sidebar Heading -->
             <h6
-              class="sidebar-heading d-flex justify-content-between align-items-center px-2 my-1 text-muted"
+              class="sidebar-heading d-flex align-items-center mt-2 text-muted"
             >
+              <span class="material-icons px-2"> search </span>
               <span>Previous Searches</span>
-              <span
-                class="link-secondary"
-                href="#"
-                aria-label="Add a new report"
-              >
-                <span class="material-icons"> search </span>
-              </span>
             </h6>
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span class="material-icons align-middle">
-                    location_city
-                  </span>
-                  <span class="align-middle">City 1</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span class="material-icons align-middle">
-                    location_city
-                  </span>
-                  <span class="align-middle">City 2</span>
+
+            <ul id="searchList" class="nav flex-column mb-2">
+              <li id="noSearches" class="nav-item">
+                <a class="nav-link">
+                  <span class="align-middle">No searches yet</span>
                 </a>
               </li>
             </ul>
@@ -93,6 +82,13 @@
           >
             <h1 class="h2">City Name</h1>
           </div>
+          <!--  -->
+
+          <p>
+            Press keys on the keyboard to see what the KeyboardEvent's key and
+            code values are for each one.
+          </p>
+          <div id="output"></div>
         </main>
       </div>
     </div>
