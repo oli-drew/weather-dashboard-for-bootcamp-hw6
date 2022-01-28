@@ -1,38 +1,25 @@
 // Api key
 const apiKey = "6218cd26c2983d4c1c16c93df2b17dc1";
-
 // Things to exclude
 const exclude = "minutely,hourly,daily,alerts";
-
 // Lat Lon
 const latLon = [33.44, -94.04];
-
 // One Call API URL
 const oneWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${latLon[0]}&lon=${latLon[1]}&exclude=${exclude}&appid=${apiKey}&units=metric`;
 
-// City
-const searchCity = "Birmingham";
-
-// Current Weather API URL
-const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}`;
-
 // Get elements by ID
 const searchInput = document.querySelector("#searchInput");
-
 const searchList = document.querySelector("#searchList");
-
-console.log(searchList);
+const cityName = document.querySelector("#cityName");
 
 // Function to get search input
-const search = () => {};
-
 searchInput.addEventListener(
   "keydown",
   function (event) {
     if (event.code == "Enter") {
       const query = searchInput.value;
-      console.log(query);
-      appendSearch(query);
+      // console.log(query);
+      getCurrentWeather(query);
     }
   },
   true
@@ -51,6 +38,11 @@ const appendSearch = (city) => {
   searchList.appendChild(li);
 };
 
+// Add city name to dom
+const showCityName = (city) => {
+  cityName.textContent = city;
+};
+
 // Get the One Weather data
 const getOneWeather = async () => {
   try {
@@ -66,38 +58,41 @@ const getOneWeather = async () => {
   }
 };
 
-// Get the One Weather data
-const getCurrentWeather = async () => {
+// Render one call output
+const renderOneWeather = (data) => {
+  // Do stuff here
+  console.log(data);
+};
+
+// Get the current Weather data
+const getCurrentWeather = async (queryCity) => {
+  // Current Weather API URL
+  const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${queryCity}&appid=${apiKey}`;
   try {
     const response = await fetch(currentWeather);
     if (response.ok) {
       // Return the response
       const data = await response.json();
-      const latLon = [data.coord.lat, data.coord.lon];
-      console.log(latLon);
-      return latLon;
+      return processCurrentWeather(data);
+      // return await response.json();
     } else {
       console.log(`Error: ${response.statusText}`);
     }
   } catch (error) {
-    console.log(`Unable to connect to OneWeather`);
+    console.log(`Unable to connect to CurrentWeather`);
   }
 };
 
-// Render one call output
-const renderWeather = (data) => {
-  // Do stuff here
-  console.log(data);
+// Process Current Weather output
+const processCurrentWeather = (data) => {
+  // City Name
+  const cityName = data.name;
+  console.log(`Name: ${cityName}`);
+  // Lat Lon
+  const latLonObj = { lat: data.coord.lat, lon: data.coord.lon };
+  console.log(latLonObj);
+  // Display city name
+  showCityName(cityName);
+  // Append city name to list
+  appendSearch(cityName);
 };
-
-// Render lat lon output
-const renderLatLon = (data) => {
-  // Do stuff here
-  console.log(data);
-};
-
-//   Render lat lon
-renderLatLon(getCurrentWeather());
-
-// Render weather
-// renderWeather(getOneWeather());
