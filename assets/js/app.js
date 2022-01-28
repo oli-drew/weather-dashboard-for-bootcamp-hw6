@@ -1,11 +1,7 @@
 // Api key
 const apiKey = "6218cd26c2983d4c1c16c93df2b17dc1";
-// Things to exclude
-const exclude = "minutely,hourly,daily,alerts";
-// Lat Lon
-const latLon = [33.44, -94.04];
 // One Call API URL
-const oneWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${latLon[0]}&lon=${latLon[1]}&exclude=${exclude}&appid=${apiKey}&units=metric`;
+// const oneWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${latLon[0]}&lon=${latLon[1]}&exclude=${exclude}&appid=${apiKey}&units=metric`;
 
 // Get elements by ID
 const searchInput = document.querySelector("#searchInput");
@@ -44,12 +40,16 @@ const showCityName = (city) => {
 };
 
 // Get the One Weather data
-const getOneWeather = async () => {
+const getOneWeather = async (lat, lon) => {
+  // Things to exclude
+  const exclude = "minutely,hourly,daily,alerts";
+  const oneWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclude}&appid=${apiKey}&units=metric`;
   try {
     const response = await fetch(oneWeather);
     if (response.ok) {
       // Return the response
-      return await response.json();
+      const data = await response.json();
+      return renderOneWeather(data);
     } else {
       console.log(`Error: ${response.statusText}`);
     }
@@ -74,7 +74,6 @@ const getCurrentWeather = async (queryCity) => {
       // Return the response
       const data = await response.json();
       return processCurrentWeather(data);
-      // return await response.json();
     } else {
       console.log(`Error: ${response.statusText}`);
     }
@@ -90,9 +89,10 @@ const processCurrentWeather = (data) => {
   console.log(`Name: ${cityName}`);
   // Lat Lon
   const latLonObj = { lat: data.coord.lat, lon: data.coord.lon };
-  console.log(latLonObj);
   // Display city name
   showCityName(cityName);
   // Append city name to list
   appendSearch(cityName);
+  // One Weather API call
+  getOneWeather(latLonObj["lat"], latLonObj["lon"]);
 };
