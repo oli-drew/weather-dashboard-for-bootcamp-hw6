@@ -76,6 +76,8 @@ const getCurrentWeather = async (queryCity) => {
       return processCurrentWeather(data);
     } else {
       console.log(`Error: ${response.statusText}`);
+      // Open error modal
+      showErrorModal(queryCity);
     }
   } catch (error) {
     console.log(`Unable to connect to CurrentWeather`);
@@ -95,4 +97,12 @@ const processCurrentWeather = (data) => {
   appendSearch(cityName);
   // One Weather API call
   getOneWeather(latLonObj["lat"], latLonObj["lon"]);
+};
+
+// Launch modal when search city not found
+const showErrorModal = (query) => {
+  const errorModal = new bootstrap.Modal(document.querySelector("#errorModal"));
+  const searchCity = document.querySelector("#searchCity");
+  searchCity.textContent = query;
+  errorModal.show();
 };
