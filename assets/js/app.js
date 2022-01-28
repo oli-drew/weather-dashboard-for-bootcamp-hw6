@@ -1,7 +1,5 @@
 // Api key
 const apiKey = "6218cd26c2983d4c1c16c93df2b17dc1";
-// One Call API URL
-// const oneWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${latLon[0]}&lon=${latLon[1]}&exclude=${exclude}&appid=${apiKey}&units=metric`;
 
 // Get elements by ID
 const searchInput = document.querySelector("#searchInput");
@@ -42,7 +40,7 @@ const showCityName = (city) => {
 // Get the One Weather data
 const getOneWeather = async (lat, lon) => {
   // Things to exclude
-  const exclude = "minutely,hourly,daily,alerts";
+  const exclude = "minutely,hourly,alerts";
   const oneWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclude}&appid=${apiKey}&units=metric`;
   try {
     const response = await fetch(oneWeather);
@@ -90,6 +88,9 @@ const renderOneWeather = (data) => {
 const getIcon = (weatherCondition) => {
   return `https://openweathermap.org/img/wn/${weatherCondition}@4x.png`;
 };
+
+// Render 5 Day weather
+//
 
 // Get the current Weather data
 const getCurrentWeather = async (queryCity) => {
