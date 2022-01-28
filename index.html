@@ -45,7 +45,7 @@
         id="searchInput"
         class="form-control w-100"
         type="text"
-        placeholder="Search for a city.."
+        placeholder="Search for a place.."
         aria-label="Search"
       />
     </header>
@@ -83,7 +83,42 @@
             <h1 id="cityName" class="h2"></h1>
           </div>
           <!-- Weather data here -->
-          <div id="output"></div>
+          <div class="container col-xxl-8 px-1 py-1">
+            <div class="row flex-row-reverse align-items-center g-1 py-1">
+              <div class="col-6">
+                <img
+                  id="currentConditionIcon"
+                  src=""
+                  class="d-block mx-lg-auto img-fluid"
+                  alt="Weather Condition Icon"
+                  width="200px"
+                  height="200px"
+                  loading="lazy"
+                />
+              </div>
+              <div class="col-6">
+                <h3>Temp: <span id="currentTemp"></span></h3>
+                <h3>Wind: <span id="currentWind"></span></h3>
+                <h3>Humidity: <span id="currentHumidity"></span></h3>
+                <h3>
+                  UV: <span id="currentUVI" class="badge bg-warning">High</span>
+                </h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 Day weather -->
+          <div class="card" style="width: 18rem">
+            <img src="" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">29/01/22</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Temp:</li>
+              <li class="list-group-item">Wind:</li>
+              <li class="list-group-item">Humidity:</li>
+            </ul>
+          </div>
         </main>
       </div>
     </div>

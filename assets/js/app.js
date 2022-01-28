@@ -58,16 +58,44 @@ const getOneWeather = async (lat, lon) => {
   }
 };
 
+// IDs of current weather
+const currentConditionIcon = document.querySelector("#currentConditionIcon");
+const currentTemp = document.querySelector("#currentTemp");
+const currentWind = document.querySelector("#currentWind");
+const currentHumidity = document.querySelector("#currentHumidity");
+const currentUVI = document.querySelector("#currentUVI");
+
 // Render one call output
 const renderOneWeather = (data) => {
   // Do stuff here
   console.log(data);
+  // Temp
+  const temp = data.current.temp;
+  currentTemp.textContent = `${temp} °C`;
+  // Wind
+  const wind = data.current.wind_speed;
+  currentWind.textContent = `${wind} m/s`;
+  // Humidity
+  const humidity = data.current.humidity;
+  currentHumidity.textContent = `${humidity} %`;
+  // UVI
+  const uvi = data.current.uvi;
+  currentUVI.textContent = uvi;
+  // Icon
+  const icon = data.current.weather[0].icon;
+  currentConditionIcon.src = getIcon(icon);
+};
+
+// Open weather icons
+const getIcon = (weatherCondition) => {
+  return `https://openweathermap.org/img/wn/${weatherCondition}@4x.png`;
 };
 
 // Get the current Weather data
 const getCurrentWeather = async (queryCity) => {
   // Current Weather API URL
   const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${queryCity}&appid=${apiKey}`;
+  // const currentWeather = `https://api.openweathermap.org/geo/1.0/direct?q=${queryCity},,GB&limit=1&&appid=${apiKey}`;
   try {
     const response = await fetch(currentWeather);
     if (response.ok) {
