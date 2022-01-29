@@ -5,6 +5,7 @@ const apiKey = "6218cd26c2983d4c1c16c93df2b17dc1";
 const searchInput = document.querySelector("#searchInput");
 const searchList = document.querySelector("#searchList");
 const cityName = document.querySelector("#cityName");
+const weatherCards = document.querySelector("#weatherCards");
 
 // Function to get search input
 searchInput.addEventListener(
@@ -82,6 +83,9 @@ const renderOneWeather = (data) => {
   // Icon
   const icon = data.current.weather[0].icon;
   currentConditionIcon.src = getIcon(icon);
+  // Daily cards
+  const dailyWeather = data.daily;
+  createWeatherCards(dailyWeather);
 };
 
 // Open weather icons
@@ -134,4 +138,31 @@ const showErrorModal = (query) => {
   const searchCity = document.querySelector("#searchCity");
   searchCity.textContent = query;
   errorModal.show();
+};
+
+// Dynamically create daily cards
+const createWeatherCards = (dailyData) => {
+  console.log(dailyData);
+  console.log(dailyData[0]);
+  console.log(dailyData[0].wind_speed);
+  //
+  weatherCards.innerHTML = "";
+  // Create 5 cards
+  for (let i = 0; i < 5; i++) {
+    const dayData = dailyData[i];
+    const card = document.createElement("div");
+    card.classList.add("card", "weather-card");
+    card.innerHTML = `<img src="${getIcon(
+      dayData.weather[0].icon
+    )}" class="card-img-top" alt="Weather Condition Icon" />
+    <div class="card-body">
+      <h5 class="card-title">29/01/22</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Temp: ${dayData.temp.day}</li>
+      <li class="list-group-item">Wind: ${dayData.wind_speed}</li>
+      <li class="list-group-item">Humidity: ${dayData.humidity}</li>
+    </ul>`;
+    weatherCards.append(card);
+  }
 };
