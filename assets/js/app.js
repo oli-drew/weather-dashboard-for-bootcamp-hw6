@@ -21,16 +21,24 @@ searchInput.addEventListener(
 );
 
 // Add search to list
-const appendSearch = (city) => {
+const appendSearch = (search) => {
   const li = document.createElement("li");
   li.classList.add("nav-item");
-  li.innerHTML = `<a class="nav-link" href="#">
+  li.innerHTML = `<a class="nav-link">
   <span class="material-icons align-middle">
     location_city
   </span>
-  <span class="align-middle">${city}</span>
+  <span class="align-middle">${search}</span>
 </a>`;
+  li.setAttribute("data-search", search);
+  li.addEventListener("click", searchLocationClicked);
   searchList.appendChild(li);
+};
+
+// Function to search to city when clicked
+const searchLocationClicked = (event) => {
+  const search = event.currentTarget.getAttribute("data-search");
+  getCurrentWeather(search);
 };
 
 // Add city name to dom
@@ -232,5 +240,7 @@ const displaySearches = () => {
   }
 };
 
-// On page load do this
-displaySearches();
+// On page load show the searches
+window.onload = displaySearches();
+
+// Searche
