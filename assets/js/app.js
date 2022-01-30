@@ -79,7 +79,10 @@ const renderOneWeather = (data) => {
   currentHumidity.textContent = `${humidity} %`;
   // UVI
   const uvi = data.current.uvi;
-  currentUVI.textContent = uvi;
+  console.log(`uvi: ${uvi}`);
+  currentUVI.innerHTML = `UV Index: <span class="badge ${UVIColours(
+    uvi
+  )}">${uvi}</span>`;
   // Icon
   const icon = data.current.weather[0].icon;
   currentConditionIcon.src = getIcon(icon);
@@ -88,13 +91,21 @@ const renderOneWeather = (data) => {
   createWeatherCards(dailyWeather);
 };
 
+// UVI Colours
+const UVIColours = (uvi) => {
+  if (uvi < 2) {
+    return "bg-success";
+  } else if (uvi >= 2 && uvi < 5) {
+    return "bg-warning";
+  } else {
+    return "bg-danger";
+  }
+};
+
 // Open weather icons
 const getIcon = (weatherCondition) => {
   return `https://openweathermap.org/img/wn/${weatherCondition}@4x.png`;
 };
-
-// Render 5 Day weather
-//
 
 // Get the current Weather data
 const getCurrentWeather = async (queryCity) => {
