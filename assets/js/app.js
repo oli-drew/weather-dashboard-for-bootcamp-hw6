@@ -70,13 +70,13 @@ const renderOneWeather = (data) => {
   console.log(data);
   // Temp
   const temp = data.current.temp;
-  currentTemp.textContent = `${temp} °C`;
+  currentTemp.textContent = `Temperature: ${temp} °C`;
   // Wind
   const wind = data.current.wind_speed;
-  currentWind.textContent = `${wind} m/s`;
+  currentWind.textContent = `Wind speed: ${wind} m/s`;
   // Humidity
   const humidity = data.current.humidity;
-  currentHumidity.textContent = `${humidity} %`;
+  currentHumidity.textContent = `Humidity: ${humidity} %`;
   // UVI
   const uvi = data.current.uvi;
   console.log(`uvi: ${uvi}`);
@@ -85,7 +85,16 @@ const renderOneWeather = (data) => {
   )}">${uvi}</span>`;
   // Icon
   const icon = data.current.weather[0].icon;
-  currentConditionIcon.src = getIcon(icon);
+  // currentConditionIcon.src = getIcon(icon);
+  //
+  currentConditionIcon.innerHTML = `<img
+  src="${getIcon(icon)}"
+  class="d-block mx-lg-auto img-fluid"
+  alt="Weather Condition Icon"
+  width="200px"
+  height="200px"
+  loading="lazy"
+/>`;
   // Daily cards
   const dailyWeather = data.daily;
   createWeatherCards(dailyWeather);
