@@ -82,17 +82,21 @@
           >
             <h1 id="cityName" class="h2"></h1>
           </div>
+
           <!-- Weather data here -->
-          <div class="container col-xxl-8 px-1 py-1">
-            <div class="row flex-row-reverse align-items-center g-1 py-1">
-              <div class="col-6">
-                <div id="currentConditionIcon"></div>
+          <div class="card mb-3">
+            <div class="row g-0 justify-content-center">
+              <div class="col-sm-4">
+                <div class="card-body">
+                  <h2 class="card-title">Current Weather</h2>
+                  <h3 id="currentTemp" class="h4"></h3>
+                  <h3 id="currentWind" class="h4"></h3>
+                  <h3 id="currentHumidity" class="h4"></h3>
+                  <h3 id="currentUVI" class="h4"></h3>
+                </div>
               </div>
-              <div class="col-6">
-                <h3 id="currentTemp"></h3>
-                <h3 id="currentWind"></h3>
-                <h3 id="currentHumidity"></h3>
-                <h3 id="currentUVI"></h3>
+              <div class="col-sm-4">
+                <div id="currentConditionIcon"></div>
               </div>
             </div>
           </div>

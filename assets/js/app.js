@@ -174,15 +174,15 @@ const createWeatherCards = (dailyData) => {
     card.classList.add("card", "weather-card");
     card.innerHTML = `<img src="${getIcon(
       dayData.weather[0].icon
-    )}" class="card-img-top" alt="Weather Condition Icon" />
-    <div class="card-body">
-      <h5 class="card-title">29/01/22</h5>
-    </div>
+    )}" <img class="card-img-top" alt="Weather Condition Icon" />
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Temp: ${dayData.temp.day}</li>
-      <li class="list-group-item">Wind: ${dayData.wind_speed}</li>
-      <li class="list-group-item">Humidity: ${dayData.humidity}</li>
-    </ul>`;
+      <li class="list-group-item">Temp: ${dayData.temp.day}  °C</li>
+      <li class="list-group-item">Wind: ${dayData.wind_speed} m/s</li>
+      <li class="list-group-item">Humidity: ${dayData.humidity} %</li>
+    </ul>
+    <div class="card-footer text-muted">
+    Date
+  </div>`;
     weatherCards.append(card);
   }
 };
