@@ -179,7 +179,9 @@ const createWeatherCards = (dailyData) => {
   weatherCards.innerHTML = "";
   // Create 5 cards
   for (let i = 0; i < 5; i++) {
-    const dayData = dailyData[i];
+    const dayData = dailyData[i + 1];
+    const dateString = moment.unix(dayData.dt).format("DD/MM/YY");
+    console.log(`date: ${dateString}`);
     const card = document.createElement("div");
     card.classList.add("card", "weather-card");
     card.innerHTML = `<img src="${getIcon(
@@ -191,7 +193,7 @@ const createWeatherCards = (dailyData) => {
       <li class="list-group-item">Humidity: ${dayData.humidity} %</li>
     </ul>
     <div class="card-footer text-muted">
-    Date
+    ${dateString}
   </div>`;
     weatherCards.append(card);
   }
