@@ -6,6 +6,7 @@ const searchInput = document.querySelector("#searchInput");
 const searchList = document.querySelector("#searchList");
 const cityName = document.querySelector("#cityName");
 const weatherCards = document.querySelector("#weatherCards");
+const currentWeatherCard = document.querySelector("#currentWeatherCard");
 
 // Function to get search input
 searchInput.addEventListener(
@@ -13,7 +14,6 @@ searchInput.addEventListener(
   function (event) {
     if (event.code == "Enter") {
       const query = searchInput.value;
-      // console.log(query);
       getCurrentWeather(query);
     }
   },
@@ -43,7 +43,10 @@ const searchLocationClicked = (event) => {
 
 // Add city name to dom
 const showCityName = (city) => {
-  cityName.textContent = city;
+  cityName.innerHTML = `<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">${city}</h1>
+</div>`;
 };
 
 // Get the One Weather data
@@ -74,8 +77,6 @@ const currentUVI = document.querySelector("#currentUVI");
 
 // Render one call output
 const renderOneWeather = (data) => {
-  // Do stuff here
-  console.log(data);
   // Temp
   const temp = data.current.temp;
   currentTemp.textContent = `Temperature: ${temp} °C`;
@@ -87,14 +88,11 @@ const renderOneWeather = (data) => {
   currentHumidity.textContent = `Humidity: ${humidity} %`;
   // UVI
   const uvi = data.current.uvi;
-  console.log(`uvi: ${uvi}`);
   currentUVI.innerHTML = `UV Index: <span class="badge ${UVIColours(
     uvi
   )}">${uvi}</span>`;
   // Icon
   const icon = data.current.weather[0].icon;
-  // currentConditionIcon.src = getIcon(icon);
-  //
   currentConditionIcon.innerHTML = `<img
   src="${getIcon(icon)}"
   class="d-block mx-lg-auto img-fluid"
@@ -103,6 +101,8 @@ const renderOneWeather = (data) => {
   height="200px"
   loading="lazy"
 />`;
+  // Show current weather
+  currentWeatherCard.classList.remove("d-none");
   // Daily cards
   const dailyWeather = data.daily;
   createWeatherCards(dailyWeather);
@@ -136,7 +136,6 @@ const getCurrentWeather = async (queryCity) => {
       const data = await response.json();
       return processCurrentWeather(data);
     } else {
-      console.log(`Error: ${response.statusText}`);
       // Open error modal
       showErrorModal(queryCity);
     }
@@ -149,11 +148,13 @@ const getCurrentWeather = async (queryCity) => {
 const processCurrentWeather = (data) => {
   // City Name
   const cityName = data.name;
-  console.log(`Name: ${cityName}`);
   // Lat Lon
   const latLonObj = { lat: data.coord.lat, lon: data.coord.lon };
-  // Display city name
-  showCityName(cityName);
+  // Date
+  const dateString = moment.unix(data.dt).format("dddd, MMMM Do YYYY");
+  const nameAndDate = `${cityName} - ${dateString}`;
+  // Display city name and date
+  showCityName(nameAndDate);
   // Append city name to list
   addSearchQuery(cityName);
   // Display the search
@@ -172,16 +173,12 @@ const showErrorModal = (query) => {
 
 // Dynamically create daily cards
 const createWeatherCards = (dailyData) => {
-  console.log(dailyData);
-  console.log(dailyData[0]);
-  console.log(dailyData[0].wind_speed);
-  //
+  // Clear weather cards
   weatherCards.innerHTML = "";
   // Create 5 cards
   for (let i = 0; i < 5; i++) {
     const dayData = dailyData[i + 1];
     const dateString = moment.unix(dayData.dt).format("DD/MM/YY");
-    console.log(`date: ${dateString}`);
     const card = document.createElement("div");
     card.classList.add("card", "weather-card");
     card.innerHTML = `<img src="${getIcon(
@@ -243,6 +240,7 @@ const displaySearches = () => {
 };
 
 // On page load show the searches
-window.onload = displaySearches();
-
-// Searche
+window.onload = function () {
+  displaySearches();
+  // getCurrentWeather("Birmingham,GB");
+};
