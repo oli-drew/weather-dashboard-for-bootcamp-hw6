@@ -147,7 +147,9 @@ const processCurrentWeather = (data) => {
   // Display city name
   showCityName(cityName);
   // Append city name to list
-  appendSearch(cityName);
+  addSearchQuery(cityName);
+  // Display the search
+  displaySearches();
   // One Weather API call
   getOneWeather(latLonObj["lat"], latLonObj["lon"]);
 };
@@ -176,7 +178,7 @@ const createWeatherCards = (dailyData) => {
       dayData.weather[0].icon
     )}" <img class="card-img-top" alt="Weather Condition Icon" />
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Temp: ${dayData.temp.day}  °C</li>
+      <li class="list-group-item">Temp: ${dayData.temp.day} °C</li>
       <li class="list-group-item">Wind: ${dayData.wind_speed} m/s</li>
       <li class="list-group-item">Humidity: ${dayData.humidity} %</li>
     </ul>
@@ -186,3 +188,49 @@ const createWeatherCards = (dailyData) => {
     weatherCards.append(card);
   }
 };
+
+// Local Storage
+// Function to get previous search query
+const getSearchQuery = () => {
+  const searches = localStorage.getItem("searches");
+  // If not null
+  if (searches) {
+    // Return the searches as an object
+    return JSON.parse(searches);
+  } else {
+    // Return empty array
+    return [];
+  }
+};
+
+// Function to add search query to local storage
+const addSearchQuery = (query) => {
+  if (query) {
+    // Get the previous searches
+    const prevQuery = getSearchQuery();
+    // Add new search query
+    prevQuery.push(query);
+    // Remove duplicates
+    uniqSearches = [...new Set(prevQuery)];
+    // Add the searches to local storage
+    localStorage.setItem("searches", JSON.stringify(uniqSearches));
+  }
+};
+
+// Function to display previous searches
+const displaySearches = () => {
+  // Array of searches
+  const searchesArr = getSearchQuery();
+  // If array is not empty
+  if (searchesArr.length > 0) {
+    // Clear innerHTML
+    searchList.innerHTML = "";
+    // Loop over the array an display the searches
+    searchesArr.forEach((search) => {
+      appendSearch(search);
+    });
+  }
+};
+
+// On page load do this
+displaySearches();
