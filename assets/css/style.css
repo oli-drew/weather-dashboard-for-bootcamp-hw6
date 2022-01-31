@@ -54,6 +54,8 @@
   overflow-y: auto;
 }
 
-/* .weather-card {
-  width: 10rem;
-} */
+.daily-card-icon {
+  width: 60%;
+  height: 60%;
+  margin: auto;
+}

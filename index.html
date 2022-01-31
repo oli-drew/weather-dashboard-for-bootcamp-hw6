@@ -48,6 +48,11 @@
         placeholder="Search for a place..."
         aria-label="Search"
       />
+      <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+          <button class="btn btn-primary px-3" id="searchBtn">Search</button>
+        </div>
+      </div>
     </header>
     <!-- Main -->
     <div class="container-fluid">
@@ -83,22 +88,23 @@
           <div id="currentWeatherCard" class="card mb-3 d-none">
             <div class="row g-0 justify-content-center">
               <div class="col-sm-4">
-                <div class="card-body">
-                  <h2 class="card-title">Current Weather</h2>
-                  <h3 id="currentTemp" class="h4"></h3>
-                  <h3 id="currentWind" class="h4"></h3>
-                  <h3 id="currentHumidity" class="h4"></h3>
-                  <h3 id="currentUVI" class="h4"></h3>
+                <div class="card-body mt-3">
+                  <div>
+                    <h3 id="currentTemp" class="h5"></h3>
+                    <h3 id="currentWind" class="h5"></h3>
+                    <h3 id="currentHumidity" class="h5"></h3>
+                    <h3 id="currentUVI" class="h5"></h3>
+                  </div>
                 </div>
               </div>
               <div class="col-sm-4">
-                <div id="currentConditionIcon"></div>
+                <div id="currentConditionIcon" class="text-center"></div>
               </div>
             </div>
           </div>
 
           <!-- 5 Day weather -->
-          <div id="weatherCards" class="card-group"></div>
+          <div id="weatherCards" class="card-group pb-4 text-center"></div>
         </main>
       </div>
     </div>

@@ -3,6 +3,7 @@ const apiKey = "6218cd26c2983d4c1c16c93df2b17dc1";
 
 // Get elements by ID
 const searchInput = document.querySelector("#searchInput");
+const searchBtn = document.querySelector("#searchBtn");
 const searchList = document.querySelector("#searchList");
 const cityName = document.querySelector("#cityName");
 const weatherCards = document.querySelector("#weatherCards");
@@ -19,6 +20,12 @@ searchInput.addEventListener(
   },
   true
 );
+
+// Search on button press
+searchBtn.addEventListener("click", function () {
+  const query = searchInput.value;
+  getCurrentWeather(query);
+});
 
 // Add search to list
 const appendSearch = (search) => {
@@ -95,7 +102,7 @@ const renderOneWeather = (data) => {
   const icon = data.current.weather[0].icon;
   currentConditionIcon.innerHTML = `<img
   src="${getIcon(icon)}"
-  class="d-block mx-lg-auto img-fluid"
+  class="d-block mx-lg-auto img-fluid m-auto"
   alt="Weather Condition Icon"
   width="200px"
   height="200px"
@@ -183,7 +190,7 @@ const createWeatherCards = (dailyData) => {
     card.classList.add("card", "weather-card");
     card.innerHTML = `<img src="${getIcon(
       dayData.weather[0].icon
-    )}" <img class="card-img-top" alt="Weather Condition Icon" />
+    )}" <img class="card-img-top daily-card-icon" alt="Weather Condition Icon"/>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Temp: ${dayData.temp.day} °C</li>
       <li class="list-group-item">Wind: ${dayData.wind_speed} m/s</li>
@@ -242,5 +249,5 @@ const displaySearches = () => {
 // On page load show the searches
 window.onload = function () {
   displaySearches();
-  // getCurrentWeather("Birmingham,GB");
+  getCurrentWeather("Birmingham,GB");
 };
