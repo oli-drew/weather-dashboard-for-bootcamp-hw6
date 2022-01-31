@@ -9,7 +9,7 @@ const cityName = document.querySelector("#cityName");
 const weatherCards = document.querySelector("#weatherCards");
 const currentWeatherCard = document.querySelector("#currentWeatherCard");
 
-// Function to get search input
+// Function to get search input on enter
 searchInput.addEventListener(
   "keydown",
   function (event) {
