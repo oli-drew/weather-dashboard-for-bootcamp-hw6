@@ -1,5 +1,4 @@
 /* Navbar */
-
 .navbar-brand {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -26,7 +25,6 @@
 }
 
 /* Sidebar */
-
 .sidebar {
   position: fixed;
   top: 0;
@@ -54,8 +52,14 @@
   overflow-y: auto;
 }
 
+/* Smaller image size on daily icons */
 .daily-card-icon {
   width: 60%;
   height: 60%;
   margin: auto;
+}
+
+/* Pointer */
+.pointer {
+  cursor: pointer;
 }

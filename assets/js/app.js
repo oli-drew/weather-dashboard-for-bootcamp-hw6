@@ -30,7 +30,7 @@ searchBtn.addEventListener("click", function () {
 // Add search to list
 const appendSearch = (search) => {
   const li = document.createElement("li");
-  li.classList.add("nav-item");
+  li.classList.add("nav-item", "pointer");
   li.innerHTML = `<a class="nav-link">
   <span class="material-icons align-middle">
     location_city
