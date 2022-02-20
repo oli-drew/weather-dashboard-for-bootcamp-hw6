@@ -24,3 +24,7 @@ The UV index is colour coded to allow users to easily interpret the value.
 ## Link to deployment
 
 https://oli-drew.github.io/weather-dashboard-for-bootcamp-hw6/
+
+## License
+
+[MIT License](LICENSE)
