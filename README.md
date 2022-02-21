@@ -28,3 +28,7 @@ https://oli-drew.github.io/weather-dashboard-for-bootcamp-hw6/
 ## License
 
 [MIT License](LICENSE)
+
+## Contact Information
+
+[Email: oli_webdev@protonmail.com](mailto:oli_webdev@protonmail.com)
